@@ -1,8 +1,10 @@
 # Dreamscape Corner
 Dreamscape Corner adalah E-Commerce yang menyediakan produk merchandise dari Honkai: Star Rail. E-Commerce ini terinspirasi dari Honkai Shop yang juga menjual merchandise game yang sama. Nama "Dreamscape Corner" di ambil dari nama toko di dalam game bernama "Dreamscape Sales Store" yang terletak di Penacony.
-
+<br>
+<br>
 Dreamscape Corner dijalankan menggunakan Pacil Web Service (PWS) yang dapat diakses diakses melalui [link berikut.](http://stefanus-tan-dreamscapecorner.pbp.cs.ui.ac.id/ "Dreamscape Corner")
-
+<br>
+<br>
 Dibuat oleh,<br>
 **Nama:** Stefanus Tan Jaya<br>
 **NPM:** 2306152456<br>
