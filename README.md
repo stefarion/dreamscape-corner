@@ -52,7 +52,11 @@ Dibuat oleh,<br>
 14. Melakukan *push* kode ke GitHub dan menunggu PWS selesai *build* proyek.
 
 ### b. Bagan Request Client ke Django
-
+![Bagan Request Client](img\Tugas\BaganDjango.jpg)
++ `urls.py` akan memilah dan memilih *views* yang perlu dikembalikan ke *client* sesuai *request* yang dikirim.
++ `views.py` menyimpan pemrosesan data yang diminta pada *request* dari *client*. Hasil datanya dapat dikembalikan bersama dengan tampilan *web* dari `main.html`.
++ `main.html` mengembalikan *response* berupa tampilan *web* kepada *client* sesuai dengan *request* sebelumnya.
++ `models.py` menjembatani *database* dan *views* di mana bentuk model pada *database* akan disimpan di dalam `models.py`. Hubungannya dengan `views.py` adalah data akan diambil dan diproses dalam `views.py` untuk memenuhi request.
 
 ### c. Fungsi `git` pada Pengembangan Proyek Lunak
 1. Riwayat Perubahan Lengkap<br>
