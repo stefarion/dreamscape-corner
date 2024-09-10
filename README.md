@@ -52,7 +52,7 @@ Dibuat oleh,<br>
 14. Melakukan *push* kode ke GitHub dan menunggu PWS selesai *build* proyek.
 
 ### b. Bagan Request Client ke Django
-![Bagan Request Client](img\Tugas\BaganDjango.jpg)
+![Bagan Request Client](img/Tugas/BaganDjango.jpg)
 + `urls.py` akan memilah dan memilih *views* yang perlu dikembalikan ke *client* sesuai *request* yang dikirim.
 + `views.py` menyimpan pemrosesan data yang diminta pada *request* dari *client*. Hasil datanya dapat dikembalikan bersama dengan tampilan *web* dari `main.html`.
 + `main.html` mengembalikan *response* berupa tampilan *web* kepada *client* sesuai dengan *request* sebelumnya.
