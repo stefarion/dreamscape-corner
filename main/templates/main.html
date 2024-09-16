@@ -1,18 +1,41 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Dreamscape Corner</title>
-    </head>
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Dreamscape Corner</title>
+{% endblock meta %}
+
+{% block content %}
+<h1>Dreamscape Corner</h1>
+{% if not products %}
+<p>Belum ada produk baru yang tersedia</p>
+{% else %}
+<table>
+    <tr>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Price (in Rp)</th>
+    <th>Description</th>
+    </tr>
     
-    <body>
-        <h1>Dreamscape Corner</h1>
-        <p><b>Name:</b> {{ name }}<p>
-        <p><b>Category:</b> {{ category }}<p>
-        <p><b>Price:</b> {{ price }}<p>
-        <p><b>Description:</b> {{ description }}<p>
-    </body>
+    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini 
+    {% endcomment %} 
+    {% for product in products %}
+    <tr>
+    <td>{{product.name}}</td>
+    <td>{{product.category}}</td>
+    <td>{{product.price}}</td>
+    <td>{{product.description}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
     
-    <footer>
-        <p>Dibuat oleh Stefanus Tan Jaya - 2306152456 - PBP D</p>
-    </footer>
-</html>
+<br />
+    
+<a href="{% url 'main:create_product_entry' %}">
+    <button>Add New Product</button>
+</a>
+
+<p>Dibuat oleh Stefanus Tan Jaya - 2306152456 - PBP D</p>
+
+{% endblock content %}

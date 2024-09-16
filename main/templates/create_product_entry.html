@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Dreamscape Corner</title>
+{% endblock meta %}
+
+{% block content %}
+<h1>Dreamscape Corner</h1>
+<h3>Add New Product Below</h3>
+
+<form method="POST">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+    <tr>
+      <td></td>
+      <td>
+        <input type="submit" value="Add Product" />
+      </td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}
