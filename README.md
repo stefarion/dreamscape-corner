@@ -87,13 +87,13 @@ Serangan CSRF adalah serangan siber yang mengeksploitasi *platform* kita dengan 
 
 ### f. Screenshot Postman
 1. Format XML
-    ![Screenshot XML](img/Tugas/XML.png)
+    ![XML](img/Tugas/XML.png)
 2. Format JSON
-    ![Screenshot JSON](img/Tugas/JSON.png)
+    ![JSON](img/Tugas/JSON.png)
 3. Format XML by ID
-    ![Screenshot XML by ID](img/Tugas/XML_ID.png)
+    ![XML by ID](img/Tugas/XML_ID.png)
 4. Format JSON by ID
-    ![Screenshot JSON by ID](img/Tugas/JSON_ID.png)
+    ![JSON by ID](img/Tugas/JSON_ID.png)
 
 ## Tugas Individu 2
 ### a. Proses Pembuatan Proyek Django
