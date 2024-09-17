@@ -22,18 +22,22 @@ def create_product_entry(request):
     context = {'form': form}
     return render(request, "create_product_entry.html", context)
 
+# Mengembalikan data dalam XML
 def show_xml(request):
     data = ProductEntry.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
+# Mengembalikan data dalam JSON
 def show_json(request):
     data = ProductEntry.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+# Mengembalikan data berdasarkan ID dalam XML
 def show_xml_by_id(request, id):
     data = ProductEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
+# Mengembalikan data berdasarkan ID dalam JSON
 def show_json_by_id(request, id):
     data = ProductEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")

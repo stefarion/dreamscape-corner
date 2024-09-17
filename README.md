@@ -30,7 +30,61 @@ Kita butuh *method* `is_valid` untuk memastikan *input* yang diterima aman dan s
 
 Serangan CSRF adalah serangan siber yang mengeksploitasi *platform* kita dengan cara mengelabui *user* hingga tanpa sadar mengirim permintaan yang diinginkan penyerang. Biasanya penyerang mendapat akses autentikasi ke *platform* kita, kemudian memanipulasi akses dan perintah dalam *platform* tersebut. *User* yang baru masuk akan digiring mengikuti perintah tertentu dan penyerang akan mendapatkan informasi yang diinginkan.
 
-### e. Proses Pembuatan Form Django
+### e. Proses Pembuatan Form Django dan Implementasi Fungsi Views
+1. Membuat `forms.py` dalam direktori `main` yang menerima *entry* produk baru dengan atribut sesuai pada `models.py`.
+    ```
+    from django.forms import ModelForm
+    from main.models import ProductEntry
+
+    class ProductEntryForm(ModelForm):
+        class Meta:
+            model = ProductEntry
+            fields = ["name", "category", "price", "description"]
+    ```
+2. Pada `views.py`, impor `form` dan `redirect`, kemudian buat fungsi `create_product_entry` untuk menampilkan `form` dalam bentuk HTML yang telah tersimpan pada *file* `create_product_entry.html` dalam direktori `templates`.
+    ```
+    def create_product_entry(request):
+        form = ProductEntryForm(request.POST or None)
+
+        if form.is_valid() and request.method == "POST":
+            form.save()
+            return redirect('main:show_main')
+
+        context = {'form': form}
+        return render(request, "create_product_entry.html", context)
+    ```
+3. Membuat 4 fungsi baru di `views.py` untuk mengembalikan data produk sesuai dengan format yang diimplementasikan.
+    ```
+    # Mengembalikan data dalam XML
+    def show_xml(request):
+        data = ProductEntry.objects.all()
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+    # Mengembalikan data dalam JSON
+    def show_json(request):
+        data = ProductEntry.objects.all()
+        return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+    # Mengembalikan data berdasarkan ID dalam XML
+    def show_xml_by_id(request, id):
+        data = ProductEntry.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+    # Mengembalikan data berdasarkan ID dalam JSON
+    def show_json_by_id(request, id):
+        data = ProductEntry.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    ```
+4. Impor keempat fungsi tersebut dalam `urls.py` dan tambah *routing* URL ke `urlpatterns` supaya dapat diakses.
+    ```
+    ···
+    path('xml/', show_xml, name='show_xml'),
+    path('json/', show_json, name='show_json'),
+    path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+    ···
+    ```
+
 ### f. Screenshot Postman
 1. Format XML
     ![Screenshot XML](img/Tugas/XML.png)
