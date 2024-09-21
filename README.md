@@ -1,4 +1,4 @@
-# ![Dreamscape Corner's Logo](img/Extras/Item_Dreamscape_Pass.png) Dreamscape Corner
+# <img src="https://github.com/stefarion/dreamscape-corner/blob/main/img/Extras/Item_Dreamscape_Pass.png" width="40" height="40" /> Dreamscape Corner
 Dreamscape Corner adalah E-Commerce yang menyediakan produk merchandise dari Honkai: Star Rail. E-Commerce ini terinspirasi dari Honkai Shop yang juga menjual merchandise game yang sama. Nama "Dreamscape Corner" di ambil dari nama toko di dalam game bernama "Dreamscape Sales Store" yang terletak di Penacony.<br>
 <br>
 <br>
