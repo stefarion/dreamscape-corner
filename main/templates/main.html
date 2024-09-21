@@ -6,6 +6,9 @@
 
 {% block content %}
 <h1 style="text-align: center;">Dreamscape Corner</h1>
+
+<h3>Welcome, {{ name }}</h3>
+
 {% if not products %}
 <p>Belum ada produk baru yang tersedia</p>
 {% else %}
@@ -32,8 +35,14 @@
     
 <br />
     
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+
 <a href="{% url 'main:create_product_entry' %}">
     <button style="background-color:#0e1b4d; color:white">Add New Product</button>
+</a>
+
+<a href="{% url 'main:logout' %}">
+    <button style="background-color:#0e1b4d; color:white">Logout</button>
 </a>
 
 <p>Dibuat oleh Stefanus Tan Jaya - 2306152456 - PBP D</p>
