@@ -13,6 +13,29 @@ Dibuat oleh,<br>
 <br>
 
 # Tugas
+## Tugas Individu 4
+### a. Perbedaan antara `HttpResponseRedirect()` dan `redirect()`
+`HttpResponseRedirect()` adalah salah satu *method* untuk mengarahkan *user* ke URL yang dimasukkan (dalam hal ini pada `urls.py`) dengan membuat *response* HTTP. Dari pengertiannya, *method* ini hanya menerima URL yang ingin dituju saja. *Method* ini digunakan saat *response* yang akan diterima *user* berisi kontrol yang spesifik yang dapat *user* gunakan, seperti pengaturan *cookies*. Contoh pengaplikasiannya pada `login_user` di `views.py`. <br>
+
+Meskipun fungsinya sama, `redirect()` lebih sederhana dan fleksibel daripada `HttpResponseRedirect()`. Selain itu, *method* ini dapat menerima URL, *view*, dan model. *Method* `redirect()` cocok digunakan saat *user* perlu berganti *views* atau *page* di *platform*. Contoh pengaplikasiannya pada `register` di `views.py`.
+
+### b. Cara Kerja Penghubungan model `Product` dengan `User`
+Penghubungan model `Product` dengan `User` diawali dengan command berikut pada `models.py`
+```
+from django.contrib.auth.models import User
+
+class ProductEntry(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ···
+```
+Pada `Product` ditambah atribut `user` yang berisi informasi `User`. `User` ini direncanakan menjadi pemilik produk di *database*. Atribut `user` diisi *Foreign Key* yang berguna untuk membuat sebuah hubungan antara `Product` dengan `User`. Dengan begitu, satu `User` dapat membuat banyak `Product` dan banyak `Product` bisa dimiliki satu `User` di dalam *database* (*many-to-one relationship*). Ada parameter `on_delete=models.CASCADE` yang berarti jika data satu `User` dihapus di dalam *database*, maka semua `Product` yang dibuat atau dimilikinya juga ikut terhapus di *database*. 
+
+### c. Perbedaan antara *authentication* dan *authorization* serta cara Django mengimplementasikan keduanya
+
+### d. Cara Django mengingat pengguna yang telah login dan kegunaan *cookies*
+
+### e. Proses Implementasi Autentikasi, Session, dan Cookies pada Django
+
 ## Tugas Individu 3
 ### a. Mengapa kita memerlukan Data Delivery dalam pengimplementasian sebuah platform?
 *Data Delivery* perlu diimplementasikan ke dalam *platform* supaya data dapat dikirim, diterima, dan diakses dengan cepat, aman, dan efisien. Banyak *platform* yang memerlukan akses data secara *real-time* untuk memberikan pengalaman yang lancar kepada *user*. Selain itu, *Data Delivery* dapat menjaga integritas data selama proses transmisi dan meningkatkan kinerja sistem dengan menangani jumlah *user* dan data dalam jumlah yang besar. 
