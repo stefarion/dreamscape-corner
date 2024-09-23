@@ -49,6 +49,73 @@ Namun, tidak semua cookies selalu aman. Beberapa contoh cookies yang berbahaya, 
 3. **Kelalaian pada Persistent Cookies**, dapat menjadi celah keamanan yang berbahaya. Sewaktu-waktu jika perangkat *user* dicuri, penyerang dapat memanfaatkan *session cookie* yang memastikan *user* tetap *login* untuk memanipulasi karena telah mendapat akses penuh tanpa batas waktu.
 
 ### e. Proses Implementasi Autentikasi, Session, dan Cookies pada Django
+1. Membuat fungsi `register`, `login_user`, dan `logout_user` di `views.py` masing-masing untuk meregistrasi akun baru, *login* sesuai akun yang di-*submit*, dan *logout* dari akun yang terautentikasi. 
+2. Membuat *file* `register.html` dan `login.html` di dalam direktori `main/templates` yang akan ditampilkan melalui fungsi-fungsi pada `views.py`. Tambahkan juga *anchor tag* `register` dalam `login.html` dan *anchor tag* `logout` dalam `main.html` supaya fungsi terhubung dan bekerja dengan semestinya.
+    ```
+    # Dalam login.html
+    <a href="{% url 'main:register' %}">Register Now</a>
+
+    # Dalam main.html
+    <a href="{% url 'main:logout' %}">
+    <button>Logout</button>
+    </a>
+    ```
+3. Impor ketiga fungsi sebelumnya di `urls.py` dalam direktori `main` dan tambah *routing* URL ke `urlpatterns`.
+    ```
+    ···
+    path('register/', register, name='register'),
+    path('login/', login_user, name='login'),
+    path('logout/', logout_user, name='logout'),
+    ···
+    ```
+4. Untuk menghubungkan model `Product` dengan `User`, impor dan tambahkan atribut `user` yang berisi `ForeignKey` untuk menghubungkan *user* dengan produk yang dibuatnya.
+    ```
+    from django.contrib.auth.models import User
+
+    class ProductEntry(models.Model):
+        user = models.ForeignKey(User, on_delete=models.CASCADE)
+        ···
+    ```
+5. Mengubah *value* `products` dan `context` pada fungsi `show_main` dalam direktori `views.py` untuk menampilkan `Product` yang terasosiasi dengan *user* yang sedang login.
+    ```
+    ···
+    def show_main(request):
+        products = ProductEntry.objects.filter(user=request.user)
+
+        context = {
+            'name': request.user.username,
+            ···
+        }
+    ···
+    ```
+6. Menjalankan migrasi model untuk menyimpan atribut `user` tersebut.
+7. Pada `main.html`, tampilkan informasi *user* yang sedang *logged in* dengan
+    ```
+    <h3>Welcome, {{ name }}</h3>
+    ```
+8. Untuk menerapkan *cookies*, impor *method* berikut pada views.py
+    ```
+    import datetime
+    from django.http import HttpResponseRedirect
+    from django.urls import reverse
+    ```
+9. Tambahkan *cookie last_login* dalam `context` pada fungsi `show_main` supaya dapat ditampilkan. Selain itu, lakukan perubahan pada fungsi `login_user` dan `logout_user` untuk manipulasi dan memperbarui *cookie*. 
+    ```
+    ···
+    context = {
+        ···
+        'last_login': request.COOKIES['last_login'],
+        ···
+    }
+    ···
+    ```
+10. Pada `main.html`, tampilkan *cookie last_login* dengan
+    ```
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+    ```
+11. Jalankan `python manage.py runserver` untuk mengakses ke `local`, kemudian buat 2 akun *user* baru, *login*, dan masing-masing buat 3 *dummy data* produk. Contoh hasilnya akan seperti di bawah ini.
+    ![Akun1](img/Tugas/Akun1.png)
+    ![Akun2](img/Tugas/Akun2.png)
 
 ## Tugas Individu 3
 ### a. Mengapa kita memerlukan Data Delivery dalam pengimplementasian sebuah platform?
