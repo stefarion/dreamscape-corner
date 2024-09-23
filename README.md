@@ -31,8 +31,22 @@ class ProductEntry(models.Model):
 Pada `Product` ditambah atribut `user` yang berisi informasi `User`. `User` ini direncanakan menjadi pemilik produk di *database*. Atribut `user` diisi *Foreign Key* yang berguna untuk membuat sebuah hubungan antara `Product` dengan `User`. Dengan begitu, satu `User` dapat membuat banyak `Product` dan banyak `Product` bisa dimiliki satu `User` di dalam *database* (*many-to-one relationship*). Ada parameter `on_delete=models.CASCADE` yang berarti jika data satu `User` dihapus di dalam *database*, maka semua `Product` yang dibuat atau dimilikinya juga ikut terhapus di *database*. 
 
 ### c. Perbedaan antara *authentication* dan *authorization* serta cara Django mengimplementasikan keduanya
+*Authentication* atau autentikasi adalah proses memverifikasi identitas diri *user*. Proses autentikasi bertujuan untuk memastikan bahwa *user* yang sedang mengakses *platform* adalah benar-benar sang *user* itu sendiri. Contoh penerapannya adalah saat *user* ingin *login* dengan memasukkan *username* dan *password* yang dibutuhkan. Setelah user mengklik login setelah memasukkan *username* dan *password*, Django akan mengecek validitas kredensial *user*. Setelah valid, Django akan membuat session untuk *user* yang telah terautentikasi. Method `AuthenticationForm()` pada Django adalah sistem bawaan khusus untuk mengautentikasi *user*. <br>
+
+*Authorization* atau otorisasi adalah proses memverifikasi hak akses *user* pada platform yang berkaitan. Sebagai contoh, *user* dengan *role* admin dapat menambah produk yang akan dijual, sementara *user* dengan role *guest* hanya dapat membeli produk yang tersedia. Setelah *user* terautentikasi, Django akan menentukan aktivitas apa saja yang diizinkan atau dapat dilakukan *user* pada platform. Contoh penerapan otorisasi adalah pada *decorator* `@login_required(login_url='/login')` yang mengarahkan *user* untuk *login* terlebih dahulu sebelum masuk ke *platform*.
 
 ### d. Cara Django mengingat pengguna yang telah login dan kegunaan *cookies*
+Django dapat mengingat *user* yang telah *login* melalui *session* dan *cookies*. *Session* berperan untuk mempertahankan status dan data dari *user* selama mereka mengirim berbagai *request* HTTP. Setelah *user* terautentikasi, Django akan membuat sebuah *session* dan memberikan sebuah *session cookie* kepada *browser* user. *Cookies* tersebut akan dikirim kembali ke server pada setiap *request* yang dilakukan dan Django dapat mengidentifikasi *user* tersebut tanpa memaksa *user* harus *login* terus-menerus. <br>
+
+Beberapa kegunaan lain dari *cookies*, antara lain
+1. Mengingat preferensi *user* (personalisasi)
+2. Dapat menyimpan data sementara, seperti pada pengisian formulir *online* di mana entri sementara akan tersimpan dan dapat di-*recover*.
+3. Fitur *Remember Me* yang memungkinkan *user* tetap terautentikasi pada *session* yang berbeda tanpa harus memasukkan kredensial mereka kembali.
+
+Namun, tidak semua cookies selalu aman. Beberapa contoh cookies yang berbahaya, antara lain
+1. **Cross-Site Scripting (XSS)**, adalah metode penyerang untuk mengambil *cookies user* lain dengan menggunakan *script* tertentu. Bila *cookie* berisi *session* ID *user*, penyerang dapat menggunakannya untuk berpura-pura sebagai *user* tersebut.
+2. **Zombie Cookies**, adalah jenis cookie yang dapat melacak dan menyimpan preferensi *user* ke berbagai *website* dan akan terus beregenerasi meskipun *user* telah menghapusnya. 
+3. **Kelalaian pada Persistent Cookies**, dapat menjadi celah keamanan yang berbahaya. Sewaktu-waktu jika perangkat *user* dicuri, penyerang dapat memanfaatkan *session cookie* yang memastikan *user* tetap *login* untuk memanipulasi karena telah mendapat akses penuh tanpa batas waktu.
 
 ### e. Proses Implementasi Autentikasi, Session, dan Cookies pada Django
 
