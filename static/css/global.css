@@ -6,6 +6,6 @@
 }
 .form-style form input:focus, form textarea:focus, form select:focus {
     outline: none;
-    border-color: #fcdf93;
-    box-shadow: 0 0 0 3px #fcdf93;
+    border-color: #0e1b4d;
+    box-shadow: 0 0 0 1px #0e1b4d;
 }

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block meta %}
 <title>Dreamscape Corner: Login</title>
 {% endblock meta %}
@@ -7,12 +7,16 @@
 {% block content %}
 <div class="min-h-screen flex items-center justify-center w-screen bg-[#72c8ff] py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
-    <div>
-      <h2 class="mt-6 text-center text-black text-3xl font-extrabold text-gray-900", style="font-family: 'Tahoma', sans-serif;">
+    <div class="flex items-center justify-between mb-4 flex-row-reverse md:flex-row md:justify-between md:items-center">
+      <img src="{% static 'image/clockie.png' %}" alt="Clockie" class="w-16 h-18 hidden md:block"/>
+      <img src="{% static 'image/pompom.png' %}" alt="Pompom" class="w-24 h-24 mx-auto md:hidden"/>
+      <h2 class="text-black text-3xl font-extrabold text-center" style="font-family: 'Tahoma', sans-serif;">
         Hello Trailblazer! <br />
         Please login first
       </h2>
+      <img src="{% static 'image/pompom.png' %}" alt="Pompom" class="w-24 h-24 hidden md:block"/>
     </div>
+    
     <form class="mt-8 space-y-6" method="POST" action="">
       {% csrf_token %}
       <input type="hidden" name="remember" value="true">
@@ -64,4 +68,18 @@
     </div>
   </div>
 </div>
+
+<style>
+  @media (max-width: 768px) {
+    .hidden.md:block {
+      display: none;
+    }
+    .md:hidden {
+      display: block;
+    }
+  }
+  img {
+      margin: 0 -20px;
+  }
+</style>
 {% endblock content %}
