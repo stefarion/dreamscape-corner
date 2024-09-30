@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-<title>Add New Product</title>
+<title>Edit Product</title>
 {% endblock meta %}
 
 {% block content %}
@@ -9,13 +9,16 @@
 
 <div class="flex flex-col min-h-screen" style="background-color: #72c8ff;">
   <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
+    <!-- Title with Tahoma font -->
     <h1 class="text-3xl font-bold text-center mb-8" style="font-family: 'Tahoma', sans-serif; color: black;">
-      Add New Product
+      Edit Product
     </h1>
   
+    <!-- Form Container -->
     <div class="shadow-md rounded-lg p-6 form-style" style="background-color: #e4cc9a;">
       <form method="POST" class="space-y-6">
         {% csrf_token %}
+        <!-- Loop through each form field -->
         {% for field in form %}
           <div class="flex flex-col">
             <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-gray-700">
@@ -27,15 +30,17 @@
             {% if field.help_text %}
               <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
             {% endif %}
+            <!-- Display field errors -->
             {% for error in field.errors %}
               <p class="mt-1 text-sm text-red-600">{{ error }}</p>
             {% endfor %}
           </div>
         {% endfor %}
-
+        
+        <!-- Submit button -->
         <div class="flex justify-center mt-6">
           <button type="submit" class="text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#142a6c] transition duration-300 ease-in-out w-full" style="background-color: #0e1b4d;">
-            Add Product
+            Edit Product
           </button>
         </div>
       </form>

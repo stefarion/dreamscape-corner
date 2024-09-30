@@ -1,101 +1,62 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block meta %}
 <title>Dreamscape Corner</title>
 {% endblock meta %}
 
 {% block content %}
+{% include 'navbar.html' %}
+
+<div class="flex flex-col min-h-screen bg-[#72c8ff] overflow-hidden">
+    <div class="flex-grow px-4 md:px-8 pb-16 pt-24">
+        <div class="flex justify-between items-center mb-8">
+            <div class="flex rounded-md items-center bg-[#0e1b4d] py-2 px-4 w-fit">
+                <h1 class="text-white text-center">Last Login: {{ last_login }}</h1>
+            </div>
+            <a href="{% url 'main:create_product_entry' %}" class="bg-[#0e1b4d] hover:bg-[#142a6c] text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                Add New Product
+            </a>
+        </div>
+
+        <div class="flex-grow">
+            {% if not products %}
+            <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                <img src="{% static 'image/belum-isi-product.png' %}" alt="No Products" class="w-40 h-30 mb-4"/>
+                <p class="text-center text-black">Why haven't you added any products yet? ( ｡ •̀ ⤙ •́ ｡ )</p>
+            </div>
+            {% else %}
+            <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full pb-12">
+                {% for product in products %}
+                    {% include 'card_product.html' with product=product %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer class="bg-[#0e1b4d] text-white text-center py-4 w-full">
+        Made by Stefanus Tan Jaya - 2306152456 - PBP D
+    </footer>
+</div>
 
 <style>
-body {
-    font-family: 'Tahoma', sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
 
-table {
-    margin: 20px auto;
-    width: 90%;
-    border-collapse: collapse;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
+    .flex-grow {
+        flex-grow: 1;
+    }
 
-table th, table td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
+    footer {
+        width: 100%;
+        flex-shrink: 0;
+    }
 
-table th {
-    background-color: #0e1b4d;
-    color: white;
-    font-weight: bold;
-}
-
-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-table tr:nth-child(odd) {
-    background-color: #f2f2f2;
-}
-
-button {
-    background-color: #0e1b4d;
-    color: white;
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #142a6c;
-}
+    .pb-12 {
+        padding-bottom: 3rem;
+    }
 </style>
-
-<h1 style="text-align: center;">Dreamscape Corner</h1>
-
-<h3>Welcome, {{ name }}</h3>
-
-{% if not products %}
-<p>Belum ada produk baru yang tersedia</p>
-{% else %}
-<table>
-    <tr>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Price (in Rp)</th>
-    <th>Description</th>
-    </tr>
-    
-    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini 
-    {% endcomment %} 
-    {% for product in products %}
-    <tr>
-    <td>{{product.name}}</td>
-    <td>{{product.category}}</td>
-    <td>{{product.price}}</td>
-    <td>{{product.description}}</td>
-    </tr>
-    {% endfor %}
-</table>
-{% endif %}
-    
-<br />
-    
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-
-<a href="{% url 'main:create_product_entry' %}">
-    <button>Add New Product</button>
-</a>
-
-<a href="{% url 'main:logout' %}">
-    <button>Logout</button>
-</a>
-
-<p>Dibuat oleh Stefanus Tan Jaya - 2306152456 - PBP D</p>
-
 {% endblock content %}
