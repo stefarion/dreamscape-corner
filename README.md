@@ -13,6 +13,73 @@ Dibuat oleh,<br>
 <br>
 
 # Tugas
+## Tugas Individu 5
+### a. Urutan Prioritas CSS Selector
+CSS Selector digunakan untuk mencari suatu elemen pada HMTL untuk diberikan *style*. Ada berbagai macam Selector dan CSS sudah mengatur skala prioritas untuk Selector tersebut, di antaranya
+1. ***Inline styles*** memiliki prioritas tertinggi.
+    ```
+    <p style="color: red;">Tes merah</p>
+    ```
+2. **ID selector** memiliki prioritas kedua, di atas Class selector.
+    ```
+    #main-title {
+        font-size: 20px;
+    }
+    ```
+3. **Class selector** memiliki prioritas di bawah Class selector dan di atas Tag selector
+    ```
+    .button {
+        color: blue;
+    }
+    ```
+4. **Elemen/Tag selector** memiliki prioritas terendah.
+    ```
+    h1 {
+        color: red;
+    }
+    ```
+5. Deklarasi `!important` atau Important Rule merupakan sebuah pengecualian, di mana akan menghiraukan semua urutan sebelumnya dan langsung diutamakan.
+    ```
+    p {
+        color: blue !important;
+    }
+    ```
+
+### b. Alasan *responsive design* penting dalam pengembangan aplikasi *web*
+Pada dasarnya, *responsive design* adalah cara menyusun *web* dengan HTML, sehingga *web* secara otomatis menyesuaikan skala konten dan elemennya dengan ukuran layar yang diterapkan untuk melihat *web* tersebut. Tujuan utamanya adalah supaya *user* dapat mengakses *web* dari perangkat apa saja (komputer, tablet, dan *smartphone*) dan tetap mendapatkan pengalaman yang nyaman dan maksimal saat menggunakan *web* tersebut. Beberapa keuntungan menerapkan *responsive design* pada *web* antara lain
+1. Meningkatkan *user-experience* di berbagai perangkat.
+2. Meningkatkan SEO (Search Engine Optimization) karena *search engine* seperti Google lebih merekomendasikan *web* yang memberikan pengalaman yang lancar di semua perangkat.
+3. Kemudahan pemeliharaan **web dengan menghilangkan pengelolaan beberapa versi *web* untuk perangkat yang berbeda.
+4. Jangkauan analisis lebih luas karena mendapat *feedback* dari berbagai perangkat yang digunakan *user*. <br>
+
+Contoh aplikasi yang mudah ditemui dan sudah menerapkan *responsive design* adalah Google yang sudah responsif di berbagai perangkat, bahkan *smart TV* sekalipun. Contoh aplikasi yang belum menerapkan *responsive design* adalah `https://pbp.cs.ui.ac.id/web/` yang dapat dilihat pada foto di bawah <br>
+![Unresponsive Web](img/Tugas/Unresponsive.png)
+
+### c. Perbedaan antara *margin*, *border*, dan *padding* serta cara mengimplementasikannya
+Secara singkat, ***margin*** merupakan ruang di luar elemen, yaitu mengelilingi *border*. ***Border*** merupakan garis yang mengelilingi elemen, termasuk *padding* dan konten. ***Padding*** merupakan ruang di dalam elemen yang memisahkan konten dengan *border*. Implementasinya seperti berikut
+```
+div {
+    margin: 10px;
+    border: 2px solid black;
+    padding: 3px;
+}
+```
+Ilustrasinya seperti berikut
+![Box Model](img/Tugas/Ilustrasi_Box.png)
+
+### d. Konsep *flexbox* dan *grid layout* serta kegunaannya
+***Flexbox*** adalah metode *layout* elemen dalam satu dimensi, baik secara horizontal maupun vertikal. *Flexbox* bekerja paling baik ketika kita perlu menyusun berbagai elemen dalam satu baris atau kolom dan mendistribusikan ruang secara fleksibel di antara elemen-elemen tersebut. Kegunaan *flexbox*, yaitu
+1. Menyusun elemen dalam satu baris atau kolom secara fleksibel
+2. Menerapkan responsivitas pada elemen sesuai ukuran *web* yang berlaku
+3. Cocok untuk bagian spesifik pada *web*, seperti *navigation bar*, *header*, dan lain-lain <br>
+
+***Grid layout*** adalah metode layout elemen dalam dua dimensi yang bekerja seperti tabel, yaitu menyelaraskan elemen-elemen ke dalam baris dan kolom. *Grid layout* memungkinkan kita mengatur *layout web* yang lebih kompleks. Kegunaan *grid layout*, yaitu
+1. Menyusun elemen dalam dua dimensi, yaitu baris dan kolom secara bersamaan
+2. Memungkinkan kontrol yang lebih besar dan presisi dalam mengatur *layout* elemen pada *web*
+3. Cocok untuk mengatur *layout web page* yang lebih besar dan kompleks
+
+### e. Proses Implementasi Edit & Delete Product serta Desain Web dengan Tailwind
+
 ## Tugas Individu 4
 ### a. Perbedaan antara `HttpResponseRedirect()` dan `redirect()`
 `HttpResponseRedirect()` adalah salah satu *method* untuk mengarahkan *user* ke URL yang dimasukkan (dalam hal ini pada `urls.py`) dengan membuat *response* HTTP. Dari pengertiannya, *method* ini hanya menerima URL yang ingin dituju saja. *Method* ini digunakan saat *response* yang akan diterima *user* berisi kontrol yang spesifik yang dapat *user* gunakan, seperti pengaturan *cookies*. Contoh pengaplikasiannya pada `login_user` di `views.py`. <br>
@@ -31,9 +98,9 @@ class ProductEntry(models.Model):
 Pada `Product` ditambah atribut `user` yang berisi informasi `User`. `User` ini direncanakan menjadi pemilik produk di *database*. Atribut `user` diisi *Foreign Key* yang berguna untuk membuat sebuah hubungan antara `Product` dengan `User`. Dengan begitu, satu `User` dapat membuat banyak `Product` dan banyak `Product` bisa dimiliki satu `User` di dalam *database* (*many-to-one relationship*). Ada parameter `on_delete=models.CASCADE` yang berarti jika data satu `User` dihapus di dalam *database*, maka semua `Product` yang dibuat atau dimilikinya juga ikut terhapus di *database*. 
 
 ### c. Perbedaan antara *authentication* dan *authorization* serta cara Django mengimplementasikan keduanya
-*Authentication* atau autentikasi adalah proses memverifikasi identitas diri *user*. Proses autentikasi bertujuan untuk memastikan bahwa *user* yang sedang mengakses *platform* adalah benar-benar sang *user* itu sendiri. Contoh penerapannya adalah saat *user* ingin *login* dengan memasukkan *username* dan *password* yang dibutuhkan. Setelah user mengklik login setelah memasukkan *username* dan *password*, Django akan mengecek validitas kredensial *user*. Setelah valid, Django akan membuat session untuk *user* yang telah terautentikasi. Method `AuthenticationForm()` pada Django adalah sistem bawaan khusus untuk mengautentikasi *user*. <br>
+***Authentication*** atau autentikasi adalah proses memverifikasi identitas diri *user*. Proses autentikasi bertujuan untuk memastikan bahwa *user* yang sedang mengakses *platform* adalah benar-benar sang *user* itu sendiri. Contoh penerapannya adalah saat *user* ingin *login* dengan memasukkan *username* dan *password* yang dibutuhkan. Setelah user mengklik login setelah memasukkan *username* dan *password*, Django akan mengecek validitas kredensial *user*. Setelah valid, Django akan membuat session untuk *user* yang telah terautentikasi. Method `AuthenticationForm()` pada Django adalah sistem bawaan khusus untuk mengautentikasi *user*. <br>
 
-*Authorization* atau otorisasi adalah proses memverifikasi hak akses *user* pada platform yang berkaitan. Sebagai contoh, *user* dengan *role* admin dapat menambah produk yang akan dijual, sementara *user* dengan role *guest* hanya dapat membeli produk yang tersedia. Setelah *user* terautentikasi, Django akan menentukan aktivitas apa saja yang diizinkan atau dapat dilakukan *user* pada platform. Contoh penerapan otorisasi adalah pada *decorator* `@login_required(login_url='/login')` yang mengarahkan *user* untuk *login* terlebih dahulu sebelum masuk ke *platform*.
+***Authorization*** atau otorisasi adalah proses memverifikasi hak akses *user* pada platform yang berkaitan. Sebagai contoh, *user* dengan *role* admin dapat menambah produk yang akan dijual, sementara *user* dengan role *guest* hanya dapat membeli produk yang tersedia. Setelah *user* terautentikasi, Django akan menentukan aktivitas apa saja yang diizinkan atau dapat dilakukan *user* pada platform. Contoh penerapan otorisasi adalah pada *decorator* `@login_required(login_url='/login')` yang mengarahkan *user* untuk *login* terlebih dahulu sebelum masuk ke *platform*.
 
 ### d. Cara Django mengingat pengguna yang telah login dan kegunaan *cookies*
 Django dapat mengingat *user* yang telah *login* melalui *session* dan *cookies*. *Session* berperan untuk mempertahankan status dan data dari *user* selama mereka mengirim berbagai *request* HTTP. Setelah *user* terautentikasi, Django akan membuat sebuah *session* dan memberikan sebuah *session cookie* kepada *browser* user. *Cookies* tersebut akan dikirim kembali ke server pada setiap *request* yang dilakukan dan Django dapat mengidentifikasi *user* tersebut tanpa memaksa *user* harus *login* terus-menerus. <br>
@@ -119,7 +186,7 @@ Namun, tidak semua cookies selalu aman. Beberapa contoh cookies yang berbahaya, 
 
 ## Tugas Individu 3
 ### a. Mengapa kita memerlukan Data Delivery dalam pengimplementasian sebuah platform?
-*Data Delivery* perlu diimplementasikan ke dalam *platform* supaya data dapat dikirim, diterima, dan diakses dengan cepat, aman, dan efisien. Banyak *platform* yang memerlukan akses data secara *real-time* untuk memberikan pengalaman yang lancar kepada *user*. Selain itu, *Data Delivery* dapat menjaga integritas data selama proses transmisi dan meningkatkan kinerja sistem dengan menangani jumlah *user* dan data dalam jumlah yang besar. 
+***Data Delivery*** perlu diimplementasikan ke dalam *platform* supaya data dapat dikirim, diterima, dan diakses dengan cepat, aman, dan efisien. Banyak *platform* yang memerlukan akses data secara *real-time* untuk memberikan pengalaman yang lancar kepada *user*. Selain itu, *Data Delivery* dapat menjaga integritas data selama proses transmisi dan meningkatkan kinerja sistem dengan menangani jumlah *user* dan data dalam jumlah yang besar. 
 
 ### b. XML atau JSON? Mengapa JSON lebih populer daripada XML?
 Bagi saya, JSON lebih baik daripada XML karena formatnya berupa `key:value` yang mudah dibaca oleh *user* dan familiar bagi programmer. *Syntax* JSON lebih padat dan mudah ditulis ketimbang XML yang bertele-tele karena membutuhkan awal dan *end tag*. JSON juga lebih mudah di-*parse* dengan menggunakan JavaScript dan prosesnya lebih aman daripada XML.
@@ -263,7 +330,7 @@ Serangan CSRF adalah serangan siber yang mengeksploitasi *platform* kita dengan 
     Komunitas Django dipenuhi developer-developer informatif yang mendukung pengembangan *framework* ini. Mereka seringkali berbagi pengalaman, *best practices*, dan tutorial yang dapat membantu developer baru untuk belajar, mengembangkan *skill*, dan membangun aplikasi yang lebih baik.<br>
     <br>
 3. Keamanan<br>
-    Django menyediakan fitur yang dapat melindungi developer baru yang masih awam terhadap ancaman siber. Django dapat mengatasi serangan maupun ancaman web, seperti Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and SQL Injection.<br>
+    Django menyediakan fitur yang dapat melindungi developer baru yang masih awam terhadap ancaman siber. Django dapat mengatasi serangan maupun ancaman *web*, seperti Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and SQL Injection.<br>
     <br>
 4. Dukungan Autentikasi<br>
     Django menyediakan fitur autentikasi dan autorisasi yang mendukung pembangunan perangkat lunak yang aman. Fitur ini termasuk kata sandi, pengaturan akses *user*, dan mendukung autentikasi dari pihak ketiga, seperti Google Sign-In.<br>
@@ -272,4 +339,4 @@ Serangan CSRF adalah serangan siber yang mengeksploitasi *platform* kita dengan 
     Django memiliki kinerja performa yang bagus, sehingga cocok untuk *software* yang membutuhkan respon cepat. *Framework* ini memiliki struktur kode yang optimal dan fitur *caching* untuk mendukung performa.
 
 ### e. Mengapa model pada Django disebut sebagai ORM?
-Model Django yang ORM (Object-Relational Mapper) memungkinkan deveoper untuk berinteraksi dengan *database*. ORM Django berfungsi untuk membuat SQL secara *pythonic* dengan mengambil dan memanipulasi data dari *database* developer. Kemudian, didapatkan hasil dengan gaya pemrograman Python yang mudah dipahami. Alhasil, kita tidak perlu menulis *query* SQL lagi jika ingin berinteraksi dengan database yang dikelola Django.
+Model Django yang **ORM (Object-Relational Mapper)** memungkinkan developer untuk berinteraksi dengan *database*. ORM Django berfungsi untuk membuat SQL secara *pythonic* dengan mengambil dan memanipulasi data dari *database* developer. Kemudian, didapatkan hasil dengan gaya pemrograman Python yang mudah dipahami. Alhasil, kita tidak perlu menulis *query* SQL lagi jika ingin berinteraksi dengan database yang dikelola Django.
