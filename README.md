@@ -1,10 +1,15 @@
 # <img src="https://github.com/stefarion/dreamscape-corner/blob/main/img/Extras/Item_Dreamscape_Pass.png" width="40" height="40" /> Dreamscape Corner
-Dreamscape Corner adalah E-Commerce yang menyediakan produk merchandise dari Honkai: Star Rail. E-Commerce ini terinspirasi dari Honkai Shop yang juga menjual merchandise game yang sama. Nama "Dreamscape Corner" di ambil dari nama toko di dalam game bernama "Dreamscape Sales Store" yang terletak di Penacony.<br>
+Dreamscape Corner adalah E-Commerce yang menyediakan produk merchandise dari Honkai: Star Rail. E-Commerce ini terinspirasi dari Honkai Shop yang juga menjual merchandise game yang sama. Nama "Dreamscape Corner" di ambil dari nama toko di dalam game bernama "Dreamscape Sales Store" yang terletak di Penacony.
 <br>
 <br>
-Dreamscape Corner dijalankan menggunakan Pacil Web Service (PWS) yang dapat diakses diakses melalui [link berikut.](http://stefanus-tan-dreamscapecorner.pbp.cs.ui.ac.id/ "Dreamscape Corner")<br>
+Dreamscape Corner dijalankan menggunakan Pacil Web Service (PWS) yang dapat diakses melalui [link berikut.](http://stefanus-tan-dreamscapecorner.pbp.cs.ui.ac.id/ "Dreamscape Corner")<br>
+Daftar Tugas Individu yang telah dikerjakan dapat dilihat di bawah ini.
++ [Tugas 2 Individu](https://github.com/stefarion/dreamscape-corner?tab=readme-ov-file#tugas-individu-2)
++ [Tugas 3 Individu](https://github.com/stefarion/dreamscape-corner?tab=readme-ov-file#tugas-individu-3)
++ [Tugas 4 Individu](https://github.com/stefarion/dreamscape-corner?tab=readme-ov-file#tugas-individu-4)
++ [Tugas 5 Individu](https://github.com/stefarion/dreamscape-corner?tab=readme-ov-file#tugas-individu-5)
 <br>
-<br>
+
 Dibuat oleh,<br>
 **Nama:** Stefanus Tan Jaya<br>
 **NPM:** 2306152456<br>
