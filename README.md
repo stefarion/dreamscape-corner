@@ -79,6 +79,193 @@ Ilustrasinya seperti berikut
 3. Cocok untuk mengatur *layout web page* yang lebih besar dan kompleks
 
 ### e. Proses Implementasi Edit & Delete Product serta Desain Web dengan Tailwind
+1. Buat *file* `global.css` di dalam `static/css` pada *root directory* untuk memberi *style form* di semua *file* yang menggunakan *form* (`register.html`, `create_product_entry.html`, `edit_product.html`).
+    ```
+    .form-style form input, form textarea, form select {
+        width: 100%;
+        padding: 0.5rem;
+        border: 2px solid #0e1b4d;
+        border-radius: 0.375rem;
+    }
+    .form-style form input:focus, form textarea:focus, form select:focus {
+        outline: none;
+        border-color: #0e1b4d;
+        box-shadow: 0 0 0 1px #0e1b4d;
+    }
+    ```
+2. Edit `base.html` supaya *web* dapat menggunakan Tailwind *styling* dan mengimplementasikan `global.css`.
+    ```
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {% block meta %} {% endblock meta %}
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
+    </head>
+
+    <body style="background-color: #72c8ff;">
+        {% block content %} {% endblock content %}
+    </body>
+    </html>
+    ```
+3. Edit tampilan `login.html` dengan menambahkan beberapa gambar (satu gambar dijadikan *background*), mengatur kontainer untuk *login form*, dan memosisikan gambar ketika ukuran *page* diperkecil.
+    ```
+    ···
+    {% block content %}
+    <div class="min-h-screen flex items-center justify-center w-screen py-12 px-4 sm:px-6 lg:px-8 relative bg-no-repeat bg-cover" style="background-image: url('{% static 'image/login-page.png' %}');">
+
+    <div class="absolute inset-0 bg-black opacity-40"></div>
+
+    <div class="relative max-w-lg w-full space-y-8 bg-white bg-opacity-60 rounded-lg shadow-lg p-8">
+        <div class="flex items-center justify-between mb-4 flex-row-reverse md:flex-row md:justify-between md:items-center">
+        <img src="{% static 'image/clockie.png' %}" alt="Clockie" class="w-16 h-21 hidden md:block"/>
+        <img src="{% static 'image/pompom.png' %}" alt="Pompom" class="w-24 h-24 mx-auto md:hidden"/>
+        <h2 class="text-black text-3xl font-extrabold text-center" style="font-family: 'Tahoma', sans-serif;">
+            Hello Trailblazer! <br />
+            Please login first
+        </h2>
+        <img src="{% static 'image/pompom.png' %}" alt="Pompom" class="w-24 h-24 hidden md:block"/>
+        </div>
+    ···
+    ```
+4. Edit tampilan `register.html` dengan *background image* sama seperti pada `login.html` dan mengatur kontainer *form*.
+    ```
+    ···
+    {% block content %}
+    <div class="min-h-screen flex items-center justify-center w-screen py-12 px-4 sm:px-6 lg:px-8 relative bg-no-repeat bg-cover" style="background-image: url('{% static 'image/login-page.png' %}');">
+    
+    <div class="absolute inset-0 bg-black opacity-40"></div>
+
+    <div class="relative max-w-lg w-full space-y-8 bg-white bg-opacity-60 rounded-lg shadow-lg p-8">
+        <div class="flex items-center justify-center py-3 px-3 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8 form-style">
+            <div>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-black", style="font-family: 'Tahoma', sans-serif;">
+                Please register here
+            </h2>
+            </div>
+    ···
+    ```
+5. Edit tampilan `create_product_entry.html` dengan mengubah warna *background* dan mengatur kontainer *form*.
+    ```
+    ···
+    <div class="flex flex-col min-h-screen" style="background-color: #72c8ff;">
+        <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
+            <h1 class="text-3xl font-bold text-center mb-8" style="font-family: 'Tahoma', sans-serif; color: black;">
+                Add New Product
+            </h1>
+    
+            <div class="shadow-md rounded-lg p-6 form-style" style="background-color: #F8F8F8;">
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+                {% for field in form %}
+    ···
+    ```
+6. Buat *file* `card_product.html` di dalam `main/templates` sebagai tampilan produk yang terdaftar dalam bentuk kartu. Edit dengan menambah pin bintang, mengubah warna, dan menempatkan *button* untuk mengedit dan menghapus produk. 
+    ```
+    <div class="relative break-inside-avoid">
+        <div class="absolute top-[0rem] z-10 -left-5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.163c.969 0 1.371 1.24.588 1.81l-3.374 2.455a1 1 0 00-.364 1.118l1.286 3.957c.3.921-.755 1.688-1.54 1.118l-3.374-2.454a1 1 0 00-1.176 0l-3.374 2.454c-.784.57-1.838-.197-1.54-1.118l1.286-3.957a1 1 0 00-.364-1.118L2.462 9.384c-.783-.57-.38-1.81.588-1.81h4.163a1 1 0 00.95-.69l1.286-3.957z" />
+        </svg>
+        </div>
+    
+        <div class="relative top-5 bg-[#403f3a] shadow-md rounded-lg mb-6 break-inside-avoid flex flex-col transition-transform duration-300 hover:rotate-1">
+        
+        <div class="bg-[#403f3a] text-gray-100 p-4 rounded-t-lg">
+            <h3 class="font-bold text-xl mb-2">{{ product.name }}</h3>
+            <p class="text-gray-300">Category: {{ product.category }}</p>
+            <p class="text-gray-300">Price: Rp {{ product.price }}</p>
+        </div>
+        
+        <div class="bg-[#e4cc9a] p-4 flex-1">
+            <p class="font-semibold text-lg mb-2">Description</p>
+            <p class="text-gray-700 mb-2 break-words">
+            {{ product.description }}
+            </p>
+    
+            <div class="flex justify-center space-x-4 mt-4">
+            <a href="{% url 'main:edit_product' product.pk %}" class="bg-[#0e1b4d] hover:bg-[#142a6c] text-white rounded-full p-2 transition duration-300 shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                </svg>
+            </a>
+    
+            <a href="{% url 'main:delete_product' product.pk %}" class="bg-red-500 hover:bg-red-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+            </a>
+            </div>
+        </div>
+        </div>
+    </div>
+    ```
+7. Buat *file* `edit_product.html` di dalam `main/templates` sebagai tampilan saat *user* ingin mengedit produk yang telah ditambahkan sebelumnya. Tampilan HTML disamakan dengan `create_product_entry.html` ahar tidak membingungkan.
+8. Buat fungsi `edit_product` dan `delete_product` di `views.py`, kemudian impor kedua fungsi tersebut di `urls.py` dalam direktori `main` dan tambah *routing* URL ke `urlpatterns`.
+    ```
+    ···
+    path('edit-product/<uuid:id>', edit_product, name='edit_product'),
+    path('delete/<uuid:id>', delete_product, name='delete_product'),
+    ···
+    ```
+9. Edit tampilan `main.html` dengan mengondisikan jika belum ada produk yang ditambah, akan menambilkan gambar dan pesan tertentu, serta sebaliknya, akan menampilkan produk yang ditambah dalam bentuk kartu dari `card_product.html`. Selain itu, ada penyetaraan informasi *last login* dengan *button* menambah produk dan merapikan *footer*.
+    ```
+    ···
+    <div class="flex flex-col min-h-screen bg-[#72c8ff] overflow-hidden">
+        <div class="flex-grow px-4 md:px-8 pb-16 pt-24">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex rounded-md items-center bg-[#0e1b4d] py-2 px-4 w-fit mb-4 md:mb-0">
+                    <h1 class="text-white text-center">Last Login: {{ last_login }}</h1>
+                </div>
+                <a href="{% url 'main:create_product_entry' %}" class="bg-[#0e1b4d] hover:bg-[#142a6c] text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                    Add New Product
+                </a>
+            </div>
+
+            <div class="flex-grow">
+                {% if not products %}
+                <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                    <img src="{% static 'image/belum-isi-product.png' %}" alt="No Products" class="w-40 h-30 mb-4"/>
+                    <p class="text-center text-black">Why haven't you added any products yet? ( ｡ •̀ ⤙ •́ ｡ )</p>
+                </div>
+                {% else %}
+                <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full pb-12">
+                    {% for product in products %}
+                        {% include 'card_product.html' with product=product %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <footer class="bg-[#0e1b4d] text-white text-center py-4 w-full">
+            Made by Stefanus Tan Jaya - 2306152456 - PBP D
+        </footer>
+    </div>
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .flex-grow {
+            flex-grow: 1;
+        }
+        footer {
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .pb-12 {
+            padding-bottom: 3rem;
+        }
+    </style>
+    ···
+    ```
+10. Buat file `navbar.html` dalam *folder* `templates` pada *root directory* untuk menghasilkan tampilan *navigation bar* pada *web*. Setelah itu, tautkan ke dalam `main.html`, `create_product_entry.html`, dan `edit_product.html` dengan *tag* `{% include 'navbar.html' %}`.
 
 ## Tugas Individu 4
 ### a. Perbedaan antara `HttpResponseRedirect()` dan `redirect()`
