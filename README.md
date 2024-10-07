@@ -8,6 +8,7 @@ Daftar Tugas Individu yang telah dikerjakan dapat dilihat di bawah ini.
 + [Tugas 3 Individu](https://github.com/stefarion/dreamscape-corner?tab=readme-ov-file#tugas-individu-3)
 + [Tugas 4 Individu](https://github.com/stefarion/dreamscape-corner?tab=readme-ov-file#tugas-individu-4)
 + [Tugas 5 Individu](https://github.com/stefarion/dreamscape-corner?tab=readme-ov-file#tugas-individu-5)
++ [Tugas 6 Individu](https://github.com/stefarion/dreamscape-corner?tab=readme-ov-file#tugas-individu-6)
 <br>
 
 Dibuat oleh,<br>
@@ -18,6 +19,37 @@ Dibuat oleh,<br>
 <br>
 
 # Tugas
+## Tugas Individu 6
+### a. Manfaat JavaScript dalam pengembangan aplikasi *web*
+JavaScript adalah bahasa pemrograman ringan yang dirancang untuk menambah interaktivitas ke halaman *web*. JavaScript sering digunakan karena memungkinkan *developer* untuk membuat aplikasi *web* yang dinamis dan responsif serta dapat memberikan umpan balik secara *real-time*. Selain itu, bahasa ini terbilang mudah dipelajari dan didukung komunitas yang besar dan informatif. <br>
+
+Beberapa manfaat JavaScript dalam pengembangan *web*, antara lain
+1. Interaksi dinamis dari sisi pengguna.
+2. Kecepatan eksekusi yang baik karena dijalankan langsung pada *browser* pengguna, sehingga menghemat *bandwidth* dan interaksi yang cepat.
+3. Pemanggilan data secara asinkronus dengan menggunakan AJAX maupun Fetch API, sehingga data dapat diambil dan diperbarui tanpa harus *refresh web page*.
+
+### b. Fungsi penggunaan `await` dalam `fetch()`
+Fungsi `fetch()` sendiri berguna untuk membuat *request* HTTP. Bila ditambah `await`, *web* dapat bekerja secara asinkronus untuk menangani respon *request*. Fungsi dari penggunaan `await` adalah untuk membuat kode menunggu sampai `Promise` yang dihasilkan `fetch()` selesai, baru melanjutkan ke baris kode berikutnya. `Promise` adalah operasi pengambilan atau *fetching* data dari server yang biasanya membutuhkan waktu. <br>
+
+Jika tidak menggunakan `await`, `fetch()` akan tetap berjalan melanjutkan ke baris kode berikutnya tanpa menunggu *fetching* data selesai. Akibatnya, hasil yang dikembalikan hanya berupa `Promise`, bukan data yang diinginkan. Contoh kasusnya bisa dilihat di bawah ini, di mana proses *fetching* belum selesai, sehingga yang dikembalikan adalah `Promise`.
+```
+function getData() {
+    const response = fetch('https://noawait.com/data');
+    console.log(response); // akan mencetak Promise, bukan data yang diinginkan
+}
+```
+
+### c. Penggunaan *decorator* `csrf_exempt` pada *view* yang digunakan untuk AJAX `POST`
+*Decorator* `csrf_exempt` berfungsi untuk menonaktifkan sementara proteksi CSRF (Cross-Site Request Forgery). Bila digunakan, artinya kita menonaktifkan proteksi CSRF untuk *view* tertentu. Sebenarnya, Django otomatis mengaktifkan proteksi CSRF untuk semua permintaan `POST`, `PUT`, atau permintaan yang memodifikasi data, misalnya dengan mengharuskan pengiriman token CSRF sebagai bagian dari *form* pada *request*. Tanpa token CSRF, Django akan memblokir permintaan `POST` karena dianggap tidak aman.
+
+
+
+### d. Alasan pembersihan data *input* juga dilakukan di *backend*
+
+
+### e. Proses Implementasi JavaScript dan AJAX
+
+
 ## Tugas Individu 5
 ### a. Urutan Prioritas CSS Selector
 CSS Selector digunakan untuk mencari suatu elemen pada HMTL untuk diberikan *style*. Ada berbagai macam Selector dan CSS sudah mengatur skala prioritas untuk Selector tersebut, di antaranya
@@ -51,10 +83,12 @@ CSS Selector digunakan untuk mencari suatu elemen pada HMTL untuk diberikan *sty
     ```
 
 ### b. Alasan *responsive design* penting dalam pengembangan aplikasi *web*
-Pada dasarnya, *responsive design* adalah cara menyusun *web* dengan HTML, sehingga *web* secara otomatis menyesuaikan skala konten dan elemennya dengan ukuran layar yang diterapkan untuk melihat *web* tersebut. Tujuan utamanya adalah supaya *user* dapat mengakses *web* dari perangkat apa saja (komputer, tablet, dan *smartphone*) dan tetap mendapatkan pengalaman yang nyaman dan maksimal saat menggunakan *web* tersebut. Beberapa keuntungan menerapkan *responsive design* pada *web* antara lain
+Pada dasarnya, *responsive design* adalah cara menyusun *web* dengan HTML, sehingga *web* secara otomatis menyesuaikan skala konten dan elemennya dengan ukuran layar yang diterapkan untuk melihat *web* tersebut. Tujuan utamanya adalah supaya *user* dapat mengakses *web* dari perangkat apa saja (komputer, tablet, dan *smartphone*) dan tetap mendapatkan pengalaman yang nyaman dan maksimal saat menggunakan *web* tersebut. <br>
+
+Beberapa keuntungan menerapkan *responsive design* pada *web* antara lain
 1. Meningkatkan *user-experience* di berbagai perangkat.
 2. Meningkatkan SEO (Search Engine Optimization) karena *search engine* seperti Google lebih merekomendasikan *web* yang memberikan pengalaman yang lancar di semua perangkat.
-3. Kemudahan pemeliharaan **web dengan menghilangkan pengelolaan beberapa versi *web* untuk perangkat yang berbeda.
+3. Kemudahan pemeliharaan *web* dengan menghilangkan pengelolaan beberapa versi *web* untuk perangkat yang berbeda.
 4. Jangkauan analisis lebih luas karena mendapat *feedback* dari berbagai perangkat yang digunakan *user*. <br>
 
 Contoh aplikasi yang mudah ditemui dan sudah menerapkan *responsive design* adalah Google yang sudah responsif di berbagai perangkat, bahkan *smart TV* sekalipun. Contoh aplikasi yang belum menerapkan *responsive design* adalah `https://pbp.cs.ui.ac.id/web/` yang dapat dilihat pada foto di bawah <br>
@@ -74,14 +108,14 @@ Ilustrasinya seperti berikut
 
 ### d. Konsep *flexbox* dan *grid layout* serta kegunaannya
 ***Flexbox*** adalah metode *layout* elemen dalam satu dimensi, baik secara horizontal maupun vertikal. *Flexbox* bekerja paling baik ketika kita perlu menyusun berbagai elemen dalam satu baris atau kolom dan mendistribusikan ruang secara fleksibel di antara elemen-elemen tersebut. Kegunaan *flexbox*, yaitu
-1. Menyusun elemen dalam satu baris atau kolom secara fleksibel
-2. Menerapkan responsivitas pada elemen sesuai ukuran *web* yang berlaku
-3. Cocok untuk bagian spesifik pada *web*, seperti *navigation bar*, *header*, dan lain-lain <br>
+1. Menyusun elemen dalam satu baris atau kolom secara fleksibel.
+2. Menerapkan responsivitas pada elemen sesuai ukuran *web* yang berlaku.
+3. Cocok untuk bagian spesifik pada *web*, seperti *navigation bar*, *header*, dan lain-lain. <br>
 
 ***Grid layout*** adalah metode layout elemen dalam dua dimensi yang bekerja seperti tabel, yaitu menyelaraskan elemen-elemen ke dalam baris dan kolom. *Grid layout* memungkinkan kita mengatur *layout web* yang lebih kompleks. Kegunaan *grid layout*, yaitu
-1. Menyusun elemen dalam dua dimensi, yaitu baris dan kolom secara bersamaan
-2. Memungkinkan kontrol yang lebih besar dan presisi dalam mengatur *layout* elemen pada *web*
-3. Cocok untuk mengatur *layout web page* yang lebih besar dan kompleks
+1. Menyusun elemen dalam dua dimensi, yaitu baris dan kolom secara bersamaan.
+2. Memungkinkan kontrol yang lebih besar dan presisi dalam mengatur *layout* elemen pada *web*.
+3. Cocok untuk mengatur *layout web page* yang lebih besar dan kompleks.
 
 ### e. Proses Implementasi Edit & Delete Product serta Desain Web dengan Tailwind
 1. Buat *file* `global.css` di dalam `static/css` pada *root directory* untuk memberi *style form* di semua *file* yang menggunakan *form* (`register.html`, `create_product_entry.html`, `edit_product.html`).
@@ -298,7 +332,7 @@ Pada `Product` ditambah atribut `user` yang berisi informasi `User`. `User` ini 
 Django dapat mengingat *user* yang telah *login* melalui *session* dan *cookies*. *Session* berperan untuk mempertahankan status dan data dari *user* selama mereka mengirim berbagai *request* HTTP. Setelah *user* terautentikasi, Django akan membuat sebuah *session* dan memberikan sebuah *session cookie* kepada *browser* user. *Cookies* tersebut akan dikirim kembali ke server pada setiap *request* yang dilakukan dan Django dapat mengidentifikasi *user* tersebut tanpa memaksa *user* harus *login* terus-menerus. <br>
 
 Beberapa kegunaan lain dari *cookies*, antara lain
-1. Mengingat preferensi *user* (personalisasi)
+1. Mengingat preferensi *user* (personalisasi).
 2. Dapat menyimpan data sementara, seperti pada pengisian formulir *online* di mana entri sementara akan tersimpan dan dapat di-*recover*.
 3. Fitur *Remember Me* yang memungkinkan *user* tetap terautentikasi pada *session* yang berbeda tanpa harus memasukkan kredensial mereka kembali.
 
@@ -506,10 +540,10 @@ Serangan CSRF adalah serangan siber yang mengeksploitasi *platform* kita dengan 
 
 ### c. Fungsi `git` pada Pengembangan Proyek Lunak
 1. Riwayat Perubahan Lengkap<br>
-    Sistem kontrol `git` dapat melacak setiap perubahan yang dilakukan pada setiap *file* seiring waktu, termasuk mencatat siapa yang membuat perubahan, kapan perubahan itu dilakukan, dan mengapa. Hal ini mencakup membuat dan menghapus file, serta mengedit kontennya. Dengan riwayat lengkap ini memungkinkan developer untuk kembali ke versi *file* sebelumnya, yang berguna untuk menemukan penyebab *bug*.<br>
+    Sistem kontrol `git` dapat melacak setiap perubahan yang dilakukan pada setiap *file* seiring waktu, termasuk mencatat siapa yang membuat perubahan, kapan perubahan itu dilakukan, dan mengapa. Hal ini mencakup membuat dan menghapus file, serta mengedit kontennya. Dengan riwayat lengkap ini memungkinkan *developer* untuk kembali ke versi *file* sebelumnya, yang berguna untuk menemukan penyebab *bug*.<br>
     <br>
 2. *Branching* dan *Merging*<br>
-    Dalam sistem kontrol `git`, tim developer dapat mengerjakan berbagai bagian proyek secara bersamaan. Meskipun dalam komputer sendiri-sendiri, developer dapat mengerjakan bagian yang berbeda secara terpisah dengan cara membuat *branch*. Nantinya, developer dapat menggabungkan kembali bagian-bagian yang terpisah ini dengan fitur *merge*. Hal ini membantu memastikan bahwa perubahan yang dilakukan di setiap bagian tidak bertentangan satu sama lain.<br>
+    Dalam sistem kontrol `git`, tim *developer* dapat mengerjakan berbagai bagian proyek secara bersamaan. Meskipun dalam komputer sendiri-sendiri, *developer* dapat mengerjakan bagian yang berbeda secara terpisah dengan cara membuat *branch*. Nantinya, *developer* dapat menggabungkan kembali bagian-bagian yang terpisah ini dengan fitur *merge*. Hal ini membantu memastikan bahwa perubahan yang dilakukan di setiap bagian tidak bertentangan satu sama lain.<br>
     <br>
 3. *Open Source* dan Fleksibilitas<br>
     Sistem kontrol `git` dapat digunakan secara terbuka oleh siapa pun yang ingin mengembangkan proyeknya. Selain itu, `git` menjadi layanan *hosting* yang komprehensif dengan *platform* yang fleksibel, seperti Gitlab, GitHub, Bitbucket, dan SourceForge. *Platform* tersebut dapat digunakan sebagai solusi untuk *hosting* berbagai proyek.
@@ -519,10 +553,10 @@ Serangan CSRF adalah serangan siber yang mengeksploitasi *platform* kita dengan 
     *Framework* Django telah dibuat untuk mudah digunakan dan mempercepat proses implementasi *software*. Django menyediakan *tools*, *components*, dan *liraries* yang membantu dalam pengembangan perangkat lunak yang sederhana.<br>
     <br>
 2. Komunitas<br>
-    Komunitas Django dipenuhi developer-developer informatif yang mendukung pengembangan *framework* ini. Mereka seringkali berbagi pengalaman, *best practices*, dan tutorial yang dapat membantu developer baru untuk belajar, mengembangkan *skill*, dan membangun aplikasi yang lebih baik.<br>
+    Komunitas Django dipenuhi *developer-developer* informatif yang mendukung pengembangan *framework* ini. Mereka seringkali berbagi pengalaman, *best practices*, dan tutorial yang dapat membantu *developer* baru untuk belajar, mengembangkan *skill*, dan membangun aplikasi yang lebih baik.<br>
     <br>
 3. Keamanan<br>
-    Django menyediakan fitur yang dapat melindungi developer baru yang masih awam terhadap ancaman siber. Django dapat mengatasi serangan maupun ancaman *web*, seperti Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and SQL Injection.<br>
+    Django menyediakan fitur yang dapat melindungi *developer* baru yang masih awam terhadap ancaman siber. Django dapat mengatasi serangan maupun ancaman *web*, seperti Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and SQL Injection.<br>
     <br>
 4. Dukungan Autentikasi<br>
     Django menyediakan fitur autentikasi dan autorisasi yang mendukung pembangunan perangkat lunak yang aman. Fitur ini termasuk kata sandi, pengaturan akses *user*, dan mendukung autentikasi dari pihak ketiga, seperti Google Sign-In.<br>
@@ -531,4 +565,4 @@ Serangan CSRF adalah serangan siber yang mengeksploitasi *platform* kita dengan 
     Django memiliki kinerja performa yang bagus, sehingga cocok untuk *software* yang membutuhkan respon cepat. *Framework* ini memiliki struktur kode yang optimal dan fitur *caching* untuk mendukung performa.
 
 ### e. Mengapa model pada Django disebut sebagai ORM?
-Model Django yang **ORM (Object-Relational Mapper)** memungkinkan developer untuk berinteraksi dengan *database*. ORM Django berfungsi untuk membuat SQL secara *pythonic* dengan mengambil dan memanipulasi data dari *database* developer. Kemudian, didapatkan hasil dengan gaya pemrograman Python yang mudah dipahami. Alhasil, kita tidak perlu menulis *query* SQL lagi jika ingin berinteraksi dengan database yang dikelola Django.
+Model Django yang **ORM (Object-Relational Mapper)** memungkinkan *developer* untuk berinteraksi dengan *database*. ORM Django berfungsi untuk membuat SQL secara *pythonic* dengan mengambil dan memanipulasi data dari *database* *developer*. Kemudian, didapatkan hasil dengan gaya pemrograman Python yang mudah dipahami. Alhasil, kita tidak perlu menulis *query* SQL lagi jika ingin berinteraksi dengan database yang dikelola Django.
