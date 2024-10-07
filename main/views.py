@@ -9,14 +9,14 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.utils.html import strip_tags
 
 @login_required(login_url='/login')
 def show_main(request):
-    products = ProductEntry.objects.filter(user=request.user)
-
     context = {
         'name': request.user.username,
-        'products': products,
         'last_login': request.COOKIES['last_login'],
     }
     return render(request, "main.html", context)
@@ -32,6 +32,24 @@ def create_product_entry(request):
 
     context = {'form': form}
     return render(request, "create_product_entry.html", context)
+
+@csrf_exempt
+@require_POST
+def add_product_ajax(request):
+    name = strip_tags(request.POST.get("name"))
+    category = strip_tags(request.POST.get("category"))
+    price = request.POST.get("price")
+    description = strip_tags(request.POST.get("description"))
+    user = request.user
+
+    new_product = ProductEntry(
+        name=name, category=category,
+        price=price, description=description,
+        user=user
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
 
 def edit_product(request, id):
     product = ProductEntry.objects.get(pk = id)
@@ -71,7 +89,8 @@ def login_user(request):
         response = HttpResponseRedirect(reverse("main:show_main"))
         response.set_cookie('last_login', str(datetime.datetime.now()))
         return response
-
+      else:
+          messages.error(request, "I'm sorry, please input the right username and password of your account")
    else:
       form = AuthenticationForm(request)
    context = {'form': form}
@@ -85,12 +104,12 @@ def logout_user(request):
 
 # Mengembalikan data dalam XML
 def show_xml(request):
-    data = ProductEntry.objects.all()
+    data = ProductEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 # Mengembalikan data dalam JSON
 def show_json(request):
-    data = ProductEntry.objects.all()
+    data = ProductEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 # Mengembalikan data berdasarkan ID dalam XML
