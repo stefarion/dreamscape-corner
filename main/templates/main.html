@@ -83,7 +83,7 @@
                   </div>
               
                 </div>
-              </div>
+            </div>
         </div>
     </div>
 
@@ -196,15 +196,19 @@
 
     function addProductEntry() {
         fetch("{% url 'main:add_product_ajax' %}", {
-        method: "POST",
-        body: new FormData(document.querySelector('#productEntryForm')),
+            method: "POST",
+            body: new FormData(document.querySelector('#productEntryForm')),
         })
-        .then(response => refreshProductEntries())
-
-        document.getElementById("productEntryForm").reset(); 
-        document.querySelector("[data-modal-toggle='crudModal']").click();
-
-        return false;
+        .then(response => {
+            if (response.ok) {
+                refreshProductEntries();
+                hideModal();
+                document.getElementById("productEntryForm").reset();
+            } else {
+                console.error('Failed to add product');
+            }
+        })
+        .catch(error => console.error('Error:', error));
     }
 
     document.getElementById("productEntryForm").addEventListener("submit", (e) => {
